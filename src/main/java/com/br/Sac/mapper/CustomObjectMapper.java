@@ -1,4 +1,4 @@
-package com.br.Sac.mapper.impl;
+package com.br.Sac.mapper;
 import org.mapstruct.Mapper;
 
 import java.util.List;
