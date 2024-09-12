@@ -1,15 +1,15 @@
 package com.br.Sac.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class Setor {
+public class TipoContato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +29,14 @@ public class Setor {
     @Column
     private LocalDateTime ultimaAtualizacao;
 
-    public Setor() {
+    public TipoContato() {
     }
 
-    public Setor(Long id) {
+    public TipoContato(Long id) {
         this.id = id;
     }
 
-    public Setor(Long id, String nome, boolean status) {
+    public TipoContato(Long id, String nome, boolean status) {
         this.id = id;
         this.nome = nome;
         this.status = status;
@@ -94,8 +94,8 @@ public class Setor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Setor setor = (Setor) o;
-        return Objects.equals(id, setor.id);
+        TipoContato that = (TipoContato) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

@@ -1,42 +1,36 @@
-package com.br.Sac.model;
+package com.br.Sac.model.dto;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import lombok.NonNull;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-@Entity
-public class Setor {
+public class TipoContatoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    @NotBlank
-    @Column
+    @NotBlank(message = "O nome do Tipo Contato precisa ser informado!")
     private String nome;
 
-    @Column
     private boolean status;
 
-    @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
     private LocalDateTime dataCriacao;
 
-    @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
     private LocalDateTime ultimaAtualizacao;
 
-    public Setor() {
+    public TipoContatoDTO() {
     }
 
-    public Setor(Long id) {
+    public TipoContatoDTO(Long id) {
         this.id = id;
     }
 
-    public Setor(Long id, String nome, boolean status) {
+    public TipoContatoDTO(Long id, String nome, boolean status) {
         this.id = id;
         this.nome = nome;
         this.status = status;
@@ -82,24 +76,5 @@ public class Setor {
 
     public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
-    }
-
-    @PrePersist
-    public void prePersist(){
-        dataCriacao = LocalDateTime.now();
-        status = true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Setor setor = (Setor) o;
-        return Objects.equals(id, setor.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
