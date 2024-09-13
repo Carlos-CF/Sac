@@ -90,7 +90,8 @@ public class TipoContatoServiceImpl implements TipoContatoService {
         dadosDto.setDataCriacao(dataHora);
         dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);
-        BeanUtils.copyProperties(dadosDto, paraEditar, "id", "status");
+        dadosDto.setStatus(dadosDto.isStatus());
+        BeanUtils.copyProperties(dadosDto, paraEditar, "id");
         TipoContato objetoAtualizado = tipoContatoRepository.saveAndFlush(dadosDto);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(tipoContatoMapper.converterParaDto(objetoAtualizado)));
 
