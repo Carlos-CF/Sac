@@ -90,7 +90,8 @@ public class SetorServiceImpl implements SetorService {
         dadosDto.setDataCriacao(dataHora);
         dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);
-        BeanUtils.copyProperties(dadosDto, paraEditar, "id", "status");
+        dadosDto.setStatus(dadosDto.isStatus());
+        BeanUtils.copyProperties(dadosDto, paraEditar, "id");
         Setor objetoAtualizado = setorRepository.saveAndFlush(dadosDto);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(setorMapper.converterParaDto(objetoAtualizado)));
     }
